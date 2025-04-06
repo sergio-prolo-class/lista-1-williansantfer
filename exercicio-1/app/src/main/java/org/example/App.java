@@ -4,11 +4,95 @@
 package org.example;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
+    
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+
+        if (args[0].equals("triangulo") && args.length != 2) {
+            exibirInstrucoes();
+
+        } else if (args[0].equals("retangulo") && args.length != 3){
+            exibirInstrucoes();
+
+        } else if (args[0].equals("losango") && ((Integer.parseInt(args[1])) % 2 == 0) ||
+                   args[0].equals("losango") && args.length != 2) {
+            exibirInstrucoes();
+        } else {
+
+            System.out.println();
+
+            if (args[0].equals("triangulo")) {
+
+                int dimensao = Integer.parseInt(args[1]);
+
+                for (int i = 0; i < dimensao; i ++) {
+                    for (int j = 0; j <= i; j++) {
+                        System.out.print("*");
+                    }
+                    System.out.println();
+                }
+            }
+
+            if (args[0].equals("losango")) {
+                int dimensao = Integer.parseInt(args[1]);
+
+                for (int i = 0; i < (dimensao/2 + 1); i++) {
+                    for (int j = 0; j < (dimensao/2 - i); j++) {
+                        System.out.print(" ");
+                    }
+
+                    for (int j = 0; j < (2 * i + 1); j++) {
+                        System.out.print("*");
+                    }
+                
+                    System.out.println();
+                }
+        
+                for (int i = (dimensao/2 - 1); i >= 0; i--) {
+                    for (int j = 0; j < (dimensao/2 - i); j++) {
+                        System.out.print(" ");
+                    }
+                    
+                    for (int j = 0; j < (2 * i + 1); j++) {
+                        System.out.print("*");
+                    }
+        
+                    System.out.println();
+                }
+            }
+
+            if (args[0].equals("retangulo")) {
+                int largura = Integer.parseInt(args[1]);
+                int altura = Integer.parseInt(args[2]);
+
+                for (int i = 0; i < largura; i++) {
+                    System.out.print("*");
+                }
+        
+                System.out.println();
+        
+                for (int i = 0; i < altura - 2; i++) {
+                    System.out.print("*");
+                    System.out.print(" ".repeat(largura - 2));
+                    System.out.println("*");
+                }
+        
+                for (int i = 0; i < largura; i++) {
+                    System.out.print("*");
+                }
+                System.out.println();
+            }
+            System.out.println();
+        }
     }
+    
+    public static void exibirInstrucoes() {
+        StringBuilder sb = new StringBuilder("Entrada Inválida. Tente Novamente.");
+        sb.append("\nNeste aplicativo, você pode escolher entre imprimir um triângulo, um losango ou um retângulo:");
+        sb.append("\nInstruções para cada um:");
+        sb.append("\n - Triângulo: passe como argumento a palavra \"triangulo\" e a dimensão (apenas um valor);");
+        sb.append("\n - Losango: passe como argumento a palavra \"losango\" e a dimensão (apenas um valor, que precisa ser ímpar);");
+        sb.append("\n - Retângulo: passe como argumento a palavra \"retangulo\" e a dimensão (são dois valores, largura e altura).");
+        System.out.println(sb);
+    }
+    
 }
