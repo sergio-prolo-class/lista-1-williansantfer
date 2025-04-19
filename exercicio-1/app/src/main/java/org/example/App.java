@@ -18,17 +18,17 @@ public class App {
             exibirInstrucoes();
         } else {
 
-            System.out.println();
-
             if (args[0].equals("triangulo")) {
 
                 int dimensao = Integer.parseInt(args[1]);
+                int espaco = dimensao;
+                int asterisco = 0;
 
-                for (int i = 0; i < dimensao; i ++) {
-                    for (int j = 0; j <= i; j++) {
-                        System.out.print("*");
-                    }
-                    System.out.println();
+                for (int i = 0; i <= dimensao; i ++) {
+                    System.out.print(" ".repeat(espaco));
+                    System.out.println("*".repeat(asterisco));
+                    espaco--;
+                    asterisco++;
                 }
             }
 
