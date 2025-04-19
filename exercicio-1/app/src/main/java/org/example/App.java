@@ -7,7 +7,10 @@ public class App {
     
     public static void main(String[] args) {
 
-        if (args[0].equals("triangulo") && args.length != 2) {
+        if (!args[0].equals("triangulo") && !args[0].equals("retangulo") && !args[0].equals("losango")) {
+            exibirInstrucoes();
+
+        } else if (args[0].equals("triangulo") && args.length != 2) {
             exibirInstrucoes();
 
         } else if (args[0].equals("retangulo") && args.length != 3){
@@ -33,6 +36,7 @@ public class App {
             }
 
             if (args[0].equals("losango")) {
+                System.out.println();
                 int dimensao = Integer.parseInt(args[1]);
 
                 for (int i = 0; i < (dimensao/2 + 1); i++) {
@@ -61,6 +65,7 @@ public class App {
             }
 
             if (args[0].equals("retangulo")) {
+                System.out.println();
                 int largura = Integer.parseInt(args[1]);
                 int altura = Integer.parseInt(args[2]);
 
