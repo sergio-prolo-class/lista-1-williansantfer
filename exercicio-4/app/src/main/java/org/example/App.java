@@ -4,34 +4,45 @@
 package org.example;
 
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
 
 public class App {
-    public static void main(String[] args) throws FileNotFoundException {
-        
-        File arquivo = new File("tabuleiro.txt");
+    
+    public static void main(String[] args) {
 
-        boolean dimensaoValida = verificarDimensao(arquivo);
+        Scanner teclado = new Scanner(System.in);
+
+        int somaAc = 0;
+        int quantColunas = 0;
+        boolean dimensaoValida;
+        int i = 0;
+
+        String[][] casas = new String[10][10];
+
+        while(teclado.hasNext()){
+            String linha = teclado.nextLine();
+            somaAc++;
+            String[] elementos = linha.split(" ");
+            casas[i] = elementos;
+            quantColunas = elementos.length;
+            i++;
+        }
+
+        if (somaAc != 10 || quantColunas != 10) {
+            dimensaoValida = false;
+        } else {
+            dimensaoValida = true;
+        }
 
         if (dimensaoValida == false) {
             System.out.println("Tabuleiro Inválido. O tabuleiro precisa ter a dimensao 10 x 10.");
         } else {
 
-            Scanner teclado = new Scanner(arquivo);
-
             String[][] tabuleiro = new String[10][10];
 
-            int i = 0;
-
-            while (teclado.hasNextLine()) {
-                String linha = teclado.nextLine();
-                String[] elementos = linha.split(" ");
-
-                for (int j = 0; j < tabuleiro.length; j++) {
-                    tabuleiro[i][j] = elementos[j];
+            for (int j = 0; j < tabuleiro.length; j++) {
+                for (int k = 0; k < tabuleiro[j].length; k++) {
+                    tabuleiro[j][k] = casas[j][k];
                 }
-                i++;
             }
 
             String condicao1 = verificarSeIncluiNaviosDesconhecidos(tabuleiro);
@@ -44,34 +55,7 @@ public class App {
                 System.out.println("Tabuleiro inválido");
             }
         }
-    }
-
-    public static boolean verificarDimensao(File arquivo) throws FileNotFoundException {
-
-        Scanner teclado = new Scanner(arquivo);
-
-        int somaAc = 0;
-
-        while (teclado.hasNext()) {
-            String linha = teclado.nextLine();
-            somaAc++;
-        }
-
-        Scanner teclado2 = new Scanner(arquivo);
-
-        int quantColunas = 0;
-
-        if (teclado2.hasNextLine()) {
-            String linha = teclado2.nextLine();
-            String[] elementos = linha.split(" ");
-            quantColunas = elementos.length;
-        }
-
-        if (somaAc != 10 || quantColunas != 10) {
-            return false;
-        } else {
-            return true;
-        }
+        teclado.close();
     }
 
     public static String verificarSeIncluiNaviosDesconhecidos(String[][] tabuleiro) {
@@ -121,7 +105,7 @@ public class App {
         }
 
         if (portaAvioesCont > 5 || encouracadoCont > 4 || cruzadorCont > 3 || submarinoCont > 3 || contratorpedeiroCont > 2) {
-            System.out.print("Há mais de um navio do mesmo tipo no tabuleiro. ");
+            System.out.print("O tabuleiro não possui apenas um navio de cada tipo. ");
 
             if (portaAvioesCont > 5) {
                 System.out.println("Há mais de um porta-aviões no tabuleiro.");
@@ -188,7 +172,6 @@ public class App {
             if (contratorpedeiroCont == 0) {
                 System.out.println("Não há navio contratorpedeiro (N) no tabuleiro.");
             }
-
             return "invalido";
         } else {
             return "valido";
