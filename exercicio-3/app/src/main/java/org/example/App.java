@@ -3,12 +3,102 @@
  */
 package org.example;
 
+import java.util.Random;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+
+        String[][] tabuleiro = new String[10][10];
+
+        for (int i = 0; i < tabuleiro.length; i++) { 
+            for (int j = 0; j < tabuleiro[i].length; j++) {
+                tabuleiro[i][j] = ". ";
+            }
+        }
+
+        int portaAvioes = 5;
+        String portaAviaosLetra = "P ";
+
+        int encouracado = 4;
+        String encouracadoLetra = "E ";
+
+        int cruzador = 3;
+        String cruzadorLetra = "C ";
+
+        int submarino = 3;
+        String submarinoLetra = "S ";
+
+        int contratorpedeiro = 2;
+        String contratorpedeiroLetra = "N ";
+
+        posicionarNavio(cruzador, cruzadorLetra, tabuleiro);
+        posicionarNavio(portaAvioes, portaAviaosLetra, tabuleiro);
+        posicionarNavio(encouracado, encouracadoLetra, tabuleiro);
+        posicionarNavio(submarino, submarinoLetra, tabuleiro);
+        posicionarNavio(contratorpedeiro, contratorpedeiroLetra, tabuleiro);
+
+        System.out.println();
+
+        for (String[] linha : tabuleiro) {
+            for (String elemento : linha) {
+                System.out.print(elemento);
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+    }
+
+    public static void posicionarNavio(int navioQuant, String navioLetra, String[][] tabuleiro) {
+        Random r = new Random();
+
+        int navio = navioQuant;
+        int linha;
+        int coluna;
+        boolean posicaoValida;
+        String direcao;
+
+        do {
+            posicaoValida = true;
+
+            direcao = (r.nextInt(2) == 1) ? "h" : "v";         // Sorteia se a direção será horizontal ou vertical.
+
+            linha = r.nextInt(10);
+            coluna = r.nextInt(10);
+
+            if (direcao.equals("h") && coluna + navio > 10) {       // Verifica se o navio irá ultrapassar o limite do tabuleiro. Se sim, a correção é feita.
+                coluna = 10 - navio;
+            } else if (direcao.equals("v") && linha + navio > 10) {
+                linha = 10 - navio;
+            }
+
+            if (direcao.equals("h")) {                              // Verificam se as posições estão disponíves.
+                for (int i = coluna; i < coluna + navio; i++) {
+                    if (!tabuleiro[linha][i].equals(". ")) {
+                        posicaoValida = false;
+                        break;
+                    }
+                }
+            } else {
+                for (int i = linha; i < linha + navio; i++) {
+                    if (!tabuleiro[i][coluna].equals(". ")) {
+                        posicaoValida = false;
+                        break;
+                    }
+                }
+            }
+
+        } while (!posicaoValida);
+
+        if (direcao.equals("h")) {                            // Atribui a letra do navio às posições que foram determinadas.
+            for (int i = coluna; i < coluna + navio; i++) {
+                tabuleiro[linha][i] = navioLetra;
+            }
+        } else {
+            for (int i = linha; i < linha + navio; i++) {
+                tabuleiro[i][coluna] = navioLetra;
+            }
+        }
     }
 }
