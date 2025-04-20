@@ -4,11 +4,149 @@
 package org.example;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+
+        if (args.length != 4) {
+            System.out.println("É necessário inserir 4 argumentos (cores).");
+            exibirInstrucoes();
+
+        } else if (args[3].equals("laranja") || args[3].equals("amarelo") || args[3].equals("branco")) {
+            System.out.println("O quarto argumento é inválido. As cores laranja, amarelo e branco não representam um valor de tolerância.");
+            exibirInstrucoes();
+
+        } else if ((args[0].equals("ouro") || args[0].equals("prata")) || (args[1].equals("ouro") || args[1].equals("prata")) || (args[2].equals("ouro") || args[2].equals("prata"))){
+            System.out.println("Somente o quarto argumento pode ser ouro ou prata.");
+            exibirInstrucoes();
+
+        } else {
+
+            // Cria um vetor para cada cor.
+
+            String[] preto = {"0", "0", "1", "0"};   
+            String[] marrom = {"1", "1", "10", "1"};
+            String[] vermelho = {"2", "2", "100", "2"};
+            String[] laranja = {"3", "3", "1000"};
+            String[] amarelo = {"4", "4", "10000"};
+            String[] verde = {"5", "5", "100000", "0,5"};
+            String[] azul = {"6", "6", "1000000", "0,25"};
+            String[] violeta = {"7", "7", "10000000", "0,1"};
+            String[] cinza = {"8", "8", "100000000", "0,05"};
+            String[] branco = {"9", "9", "1000000000"};
+
+            String[] resultado = new String[4]; // Vetor que receberá os quatro valores.
+
+            if (args[0].equals("preto")) { // Verifica o primeiro argumento e atribui o valor correspondente à posição 0 de "resultado".
+                resultado[0] = preto[0];
+            } else if (args[0].equals("marrom")) {
+                resultado[0] = marrom[0];
+            } else if (args[0].equals("vermelho")) {
+                resultado[0] = vermelho[0];
+            } else if (args[0].equals("laranja")) {
+                resultado[0] = laranja[0];
+            } else if (args[0].equals("amarelo")) {
+                resultado[0] = amarelo[0];
+            } else if (args[0].equals("verde")) {
+                resultado[0] = verde[0];
+            } else if (args[0].equals("azul")) {
+                resultado[0] = azul[0];
+            } else if (args[0].equals("violeta")) {
+                resultado[0] = violeta[0];
+            } else if (args[0].equals("cinza")) {
+                resultado[0] = cinza[0];
+            } else if (args[0].equals("branco")) {
+                resultado[0] = branco[0];
+            }
+
+            if (args[1].equals("preto")) { // Verifica o segundo argumento e atribui o valor correspondente à posição 1 de "resultado".
+                resultado[1] = preto[1];
+            } else if (args[1].equals("marrom")) {
+                resultado[1] = marrom[1];
+            } else if (args[1].equals("vermelho")) {
+                resultado[1] = vermelho[1];
+            } else if (args[1].equals("laranja")) {
+                resultado[1] = laranja[1];
+            } else if (args[1].equals("amarelo")) {
+                resultado[1] = amarelo[1];
+            } else if (args[1].equals("verde")) {
+                resultado[1] = verde[1];
+            } else if (args[1].equals("azul")) {
+                resultado[1] = azul[1];
+            } else if (args[1].equals("violeta")) {
+                resultado[1] = violeta[1];
+            } else if (args[1].equals("cinza")) {
+                resultado[1] = cinza[1];
+            } else if (args[1].equals("branco")) {
+                resultado[1] = branco[1];
+            }
+
+            if (args[2].equals("preto")) { // Verifica o terceiro argumento e atribui o valor correspondente à posição 2 de "resultado".
+                resultado[2] = preto[2];
+            } else if (args[2].equals("marrom")) {
+                resultado[2] = marrom[2];
+            } else if (args[2].equals("vermelho")) {
+                resultado[2] = vermelho[2];
+            } else if (args[2].equals("laranja")) {
+                resultado[2] = laranja[2];
+            } else if (args[2].equals("amarelo")) {
+                resultado[2] = amarelo[2];
+            } else if (args[2].equals("verde")) {
+                resultado[2] = verde[2];
+            } else if (args[2].equals("azul")) {
+                resultado[2] = azul[2];
+            } else if (args[2].equals("violeta")) {
+                resultado[2] = violeta[2];
+            } else if (args[2].equals("cinza")) {
+                resultado[2] = cinza[2];
+            } else if (args[2].equals("branco")) {
+                resultado[2] = branco[2];
+            }
+
+            if (args[3].equals("preto")) { // Verifica o quarto argumento e atribui o valor correspondente à posição 3 de "resultado".
+                resultado[3] = preto[3];
+            } else if (args[3].equals("marrom")) {
+                resultado[3] = marrom[3];
+            } else if (args[3].equals("vermelho")) {
+                resultado[3] = vermelho[3];
+            } else if (args[3].equals("verde")) {
+                resultado[3] = verde[3];
+            } else if (args[3].equals("azul")) {
+                resultado[3] = azul[3];
+            } else if (args[3].equals("violeta")) {
+                resultado[3] = violeta[3];
+            } else if (args[3].equals("cinza")) {
+                resultado[3] = cinza[3];
+            } else if (args[3].equals("ouro")) {
+                resultado[3] = "5";
+            } else if (args[3].equals("prata")) {
+                resultado[3] = "10";
+            }
+
+            long calculo = Long.parseLong(resultado[0] + resultado[1]) * Long.parseLong(resultado[2]);
+
+            if (calculo >= 1000 && calculo < 1000000) {
+            
+                System.out.println("Resistência: " + ((double) calculo / 1000) + " k Ohms " + "(+- " + resultado[3] + "%)");
+            
+            } else if (calculo >= 1000000 && calculo < 1000000000) {
+             
+                System.out.println("Resistência: " + ((double) calculo / 1000000) + " M Ohms " + "(+- " + resultado[3] + "%)");
+
+            } else if (calculo >= 1000000000) {
+             
+                System.out.println("Resistência: " + ((double) calculo / 1000000000) + " G Ohms " + "(+- " + resultado[3] + "%)");
+            }
+        }
+    }
+
+    public static void exibirInstrucoes() {
+        StringBuilder sb = new StringBuilder("\nInstruções:");
+        sb.append("\n\nNesta aplicação, o objetivo é imprimir na tela um determinado valor de resistência de um resistor de 4 faixas.");
+        sb.append("\nPara isso, entre com 4 argumentos, separados por espaço, que representa cada cor de faixa do resistor.");
+        sb.append("\n\nCores selecionáveis:");
+        sb.append("\n\n - Faixa 1 / Faixa 2: preto, marrom, vermelho, laranja, amarelo, verde, azul, violeta, cinza e branco;");
+        sb.append("\n - Faixa 3 (Multiplicador): preto, marrom, vermelho, laranja, amarelo, verde, azul, violeta, cinza e branco;");
+        sb.append("\n - Faixa 4 (Tolerância): preto, marrom, vermelho, verde, azul, violeta, cinza, ouro e prata.");
+        System.out.println(sb);
     }
 }
