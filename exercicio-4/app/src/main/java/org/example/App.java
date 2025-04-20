@@ -3,10 +3,195 @@
  */
 package org.example;
 
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 public class App {
-    
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         
+        File arquivo = new File("tabuleiro.txt");
+
+        boolean dimensaoValida = verificarDimensao(arquivo);
+
+        if (dimensaoValida == false) {
+            System.out.println("Tabuleiro Inválido. O tabuleiro precisa ter a dimensao 10 x 10.");
+        } else {
+
+            Scanner teclado = new Scanner(arquivo);
+
+            String[][] tabuleiro = new String[10][10];
+
+            int i = 0;
+
+            while (teclado.hasNextLine()) {
+                String linha = teclado.nextLine();
+                String[] elementos = linha.split(" ");
+
+                for (int j = 0; j < tabuleiro.length; j++) {
+                    tabuleiro[i][j] = elementos[j];
+                }
+                i++;
+            }
+
+            String condicao1 = verificarSeIncluiNaviosDesconhecidos(tabuleiro);
+            String condicao2 = verificarSeIncluiMuiltiplosNaviosDoMesmoTipo(tabuleiro);
+            String condicao3 = verificarSeNaoIncluiUmNavioDeCadaTipo(tabuleiro);
+
+            if (condicao1.equals("valido") && condicao2.equals("valido") && condicao3.equals("valido")) {
+                System.out.println("Tabuleiro válido");
+            } else {
+                System.out.println("Tabuleiro inválido");
+            }
+        }
     }
 
+    public static boolean verificarDimensao(File arquivo) throws FileNotFoundException {
+
+        Scanner teclado = new Scanner(arquivo);
+
+        int somaAc = 0;
+
+        while (teclado.hasNext()) {
+            String linha = teclado.nextLine();
+            somaAc++;
+        }
+
+        Scanner teclado2 = new Scanner(arquivo);
+
+        int quantColunas = 0;
+
+        if (teclado2.hasNextLine()) {
+            String linha = teclado2.nextLine();
+            String[] elementos = linha.split(" ");
+            quantColunas = elementos.length;
+        }
+
+        if (somaAc != 10 || quantColunas != 10) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static String verificarSeIncluiNaviosDesconhecidos(String[][] tabuleiro) {
+
+        int desconhecidoCont = 0;
+
+        for (int i = 0; i < tabuleiro.length; i++) {
+            for (int j = 0; j < tabuleiro[i].length; j++) {
+                if (!tabuleiro[i][j].equals(".") && !tabuleiro[i][j].equals("P") && !tabuleiro[i][j].equals("E") &&
+                !tabuleiro[i][j].equals("C") && !tabuleiro[i][j].equals("S") && !tabuleiro[i][j].equals("N")) {
+                    desconhecidoCont++;
+                }
+            }
+        }
+
+        if (desconhecidoCont != 0) {
+            System.out.println("Há navio(s) desconhecido(s) no tabuleiro.");
+            return "invalido";
+        } else {
+            return "valido";
+        }
+    }
+
+    public static String verificarSeIncluiMuiltiplosNaviosDoMesmoTipo(String[][] tabuleiro) {
+
+        int portaAvioesCont = 0;
+        int encouracadoCont = 0;
+        int cruzadorCont = 0;
+        int submarinoCont = 0;
+        int contratorpedeiroCont = 0;
+
+        for (int i = 0; i < tabuleiro.length; i++) {
+            for (int j = 0; j < tabuleiro[i].length; j++) {
+
+                if (tabuleiro[i][j].equals("P")) {
+                    portaAvioesCont++;
+                } else if (tabuleiro[i][j].equals("E")) {
+                    encouracadoCont++;
+                } else if (tabuleiro[i][j].equals("C")) {
+                    cruzadorCont++;
+                } else if(tabuleiro[i][j].equals("S")) {
+                    submarinoCont++;
+                } else if (tabuleiro[i][j].equals("N")) {
+                    contratorpedeiroCont++;
+                }
+            }
+        }
+
+        if (portaAvioesCont > 5 || encouracadoCont > 4 || cruzadorCont > 3 || submarinoCont > 3 || contratorpedeiroCont > 2) {
+            System.out.print("Há mais de um navio do mesmo tipo no tabuleiro. ");
+
+            if (portaAvioesCont > 5) {
+                System.out.println("Há mais de um porta-aviões no tabuleiro.");
+            }
+            if (encouracadoCont > 4) {
+                System.out.println("Há mais de um encouraçado no tabuleiro.");
+            }
+            if (cruzadorCont > 3) {
+                System.out.println("Há mais de um cruzador no tabuleiro.");
+            }
+            if (submarinoCont > 3) {
+                System.out.println("Há mais de um submarino no tabuleiro.");
+            }
+            if (contratorpedeiroCont > 2) {
+                System.out.println("Há mais de um contratorpedeiro no tabuleiro.");
+            }
+
+            return "invalido";
+        } else {
+            return "valido";
+        }
+    }
+
+    public static String verificarSeNaoIncluiUmNavioDeCadaTipo(String[][] tabuleiro) {
+
+        int portaAvioesCont = 0;
+        int encouracadoCont = 0;
+        int cruzadorCont = 0;
+        int submarinoCont = 0;
+        int contratorpedeiroCont = 0;
+
+        for (int i = 0; i < tabuleiro.length; i++) {
+            for (int j = 0; j < tabuleiro[i].length; j++) {
+
+                if (tabuleiro[i][j].equals("P")) {
+                    portaAvioesCont++;
+                } else if (tabuleiro[i][j].equals("E")) {
+                    encouracadoCont++;
+                } else if (tabuleiro[i][j].equals("C")) {
+                    cruzadorCont++;
+                } else if(tabuleiro[i][j].equals("S")) {
+                    submarinoCont++;
+                } else if (tabuleiro[i][j].equals("N")) {
+                    contratorpedeiroCont++;
+                }
+            }
+        }
+
+        if (portaAvioesCont == 0 || encouracadoCont == 0 || cruzadorCont == 0 || submarinoCont == 0 || contratorpedeiroCont == 0) {
+            System.out.print("O tabuleiro não inclui um navio de cada tipo. ");
+
+            if (portaAvioesCont == 0) {
+                System.out.println("Não há navio porta-aviões (P) no tabuleiro.");
+            }
+            if (encouracadoCont == 0) {
+                System.out.println("Não há navio encouraçado (E) no tabuleiro.");
+            } 
+            if (cruzadorCont == 0) {
+                System.out.println("Não há navio cruzador (C) no tabuleiro.");
+            } 
+            if (submarinoCont == 0) {
+                System.out.println("Não há navio submarino (S) no tabuleiro.");
+            } 
+            if (contratorpedeiroCont == 0) {
+                System.out.println("Não há navio contratorpedeiro (N) no tabuleiro.");
+            }
+
+            return "invalido";
+        } else {
+            return "valido";
+        }
+    }
 }
