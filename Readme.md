@@ -18,9 +18,9 @@
 
     Exemplo:
 
-    Certifique-se de estar em lista-1-williansantfer/exercicio-1
+        Certifique-se de estar em lista-1-williansantfer/exercicio-1
 
-    Após isso, no terminal, digite: gradle run --args "triangulo 5"
+        Após isso, no terminal, digite: gradle run --args "triangulo 5"
 
 **Aplicação 2**
 
@@ -38,9 +38,9 @@
 
     Exemplo:
 
-    Certifique-se de estar em lista-1-williansantfer/exercicio-2
+        Certifique-se de estar em lista-1-williansantfer/exercicio-2
 
-    Em seguida, no terminal, digite: gradle run --args "amarelo branco verde azul"
+        Em seguida, no terminal, digite: gradle run --args "amarelo branco verde azul"
 
 **Aplicação 3**
 
