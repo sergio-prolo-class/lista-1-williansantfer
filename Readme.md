@@ -26,7 +26,9 @@
 
 	Neste programa, é possível imprimir na tela um determinado valor de resistência, baseado em resistor de 4 faixas.
 
-    Deve-se entrar com 4 argumentos. Todos serão cores, em letras minúsculas, sem acento e separados por um espaço. A primeira cor representa a primeira faixa do resistor, a segunda cor representa a segunda faixa do resistor e assim por diante.
+    Deve-se entrar com 4 argumentos. Todos serão cores, em letras minúsculas, sem acento e separados por um espaço.
+    
+    A primeira cor representa a primeira faixa do resistor, a segunda cor representa a segunda faixa do resistor e assim por diante.
 
     Cores disponíveis para cada faixa:
 
@@ -58,6 +60,4 @@
 
 		Certifique-se de estar em lista-1-williansantfer/exercicio-4
 
-		Depois, no terminal, digite:
-        
-        ```gradle run < tabuleiro.txt```
+		Depois, no terminal, digite: gradle run < tabuleiro.txt
